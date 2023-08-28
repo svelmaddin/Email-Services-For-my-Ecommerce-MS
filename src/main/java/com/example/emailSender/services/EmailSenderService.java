@@ -22,14 +22,17 @@ public class EmailSenderService {
 
     public void sendMailToCustomerAboutOrderStatus(OrderStatusEmail order) {
         String customerEmail = userEmailsResponse(order.getCustomerId());
-        String storeEmail = storeEmailsResponse(order.getStoreId());
-        String body = "Dear customer! \nyour order Id :    " + order.getOrderId() +
+        String productNames = String.join(", ", order.getProductNames());
+        String body = "Dear" + order.getCustomerName() + "!" +
+                "\nyour order Id :    " + order.getOrderId() +
                 "\norder status :   " + order.getOrderStatus() +
-                "\norder details :   " + order.getDetails() +
-                "\nOrder totalPrice :   " + order.getPrice() +
+                "\norder details :   " + productNames +
+                "\nOrder totalPrice :   " + order.getTotalPrice() +
+                "\nOrder DeliveryAddress :   " + order.getDeliveryAddress() +
+                "\nOrder discount :   " + order.getDiscount() +
                 "\nThank you for shop.";
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(storeEmail);
+        message.setFrom("elmeddin.sv@gmail.com");
         message.setTo(customerEmail);
         message.setText(body);
         message.setSubject("TEST");

@@ -1,6 +1,7 @@
 package com.example.emailSender.controller;
 
 import com.example.emailSender.response.OrderResponse;
+import com.example.emailSender.response.OrderStatusEmail;
 import com.example.emailSender.services.EmailSenderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,10 @@ public class emailSender {
     }
 
     @PostMapping("/emailSendToCustomer")
-    public ResponseEntity<String> sendMailToCustomerAboutOrderStatus(@RequestBody OrderResponse orderResponse) {
+    public ResponseEntity<String> sendMailToCustomerAboutOrderStatus(@RequestBody OrderStatusEmail orderResponse) {
         emailSenderService.sendMailToCustomerAboutOrderStatus(orderResponse);
         return ResponseEntity.ok("Email Has been sent successfully");
     }
-
 
 
 }
