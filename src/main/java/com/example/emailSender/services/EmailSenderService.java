@@ -1,6 +1,7 @@
 package com.example.emailSender.services;
 
 import com.example.emailSender.response.OrderResponse;
+import com.example.emailSender.response.OrderStatusEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,7 +20,7 @@ public class EmailSenderService {
         this.restTemplate = restTemplate;
     }
 
-    public void sendMailToCustomerAboutOrderStatus(OrderResponse order) {
+    public void sendMailToCustomerAboutOrderStatus(OrderStatusEmail order) {
         String customerEmail = userEmailsResponse(order.getCustomerId());
         String storeEmail = storeEmailsResponse(order.getStoreId());
         String body = "Dear customer! \nyour order Id :    " + order.getOrderId() +
@@ -36,13 +37,13 @@ public class EmailSenderService {
         System.out.println("email sent was successfully to : " + order.getCustomerId());
     }
 
-    public String userEmailsResponse(String userId) {
+    private String userEmailsResponse(String userId) {
         String URL = "http://localhost:9091/user/getEmailByUserId/" + userId;
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(URL, String.class);
         return responseEntity.getBody();
     }
 
-    public String storeEmailsResponse(String userId) {
+    private String storeEmailsResponse(String userId) {
         String URL = "http://localhost:9091/user/getEmailByUserId/" + userId;
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(URL, String.class);
         return responseEntity.getBody();
