@@ -1,6 +1,5 @@
 package com.example.emailSender.services;
 
-import com.example.emailSender.response.OrderResponse;
 import com.example.emailSender.response.OrderStatusEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
